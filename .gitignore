@@ -1,0 +1,13 @@
+.Rproj.user
+cache
+inputs
+.Rhistory
+.Rdata
+.RData
+.secret
+.secrets
+.Rprofile
+.Restart*
+.httr-oauth
+.DS_Store
+.quarto

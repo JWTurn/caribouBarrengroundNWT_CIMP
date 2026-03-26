@@ -14,6 +14,7 @@ makeBarrengroundLand <- function(studyAreaLarge, inPath, dPath){
   lc_seg <- terra::segregate(lc)
   names(lc_seg) <- paste0('LC_', names(lc_seg))
 
+  # CanVec
   waterBodies <- reproducible::prepInputs(url = 'https://ftp.maps.canada.ca/pub/nrcan_rncan/vector/canvec/shp/Hydro/canvec_250K_NT_Hydro_shp.zip',
                                           inputsPath = inPath,
                                           destinationPath = dPath,
@@ -26,7 +27,7 @@ makeBarrengroundLand <- function(studyAreaLarge, inPath, dPath){
   exp_wb <- 1- exp(-0.003*dist_wb)
   names(exp_wb) <- 'exp_wb'
 
-
+  # ECCC for now
   disturbance <- prep_anthroDisturbance(inputsPath = inPath, studyArea = studyAreaLarge,
                                         dataPath = dPath, source = 'ECCC', studyAreaName = NULL)
 

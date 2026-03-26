@@ -7,6 +7,11 @@ projPath = "~/git-local/caribouBarrengroundNWT_CIMP"
 reproducibleInputsPath = "~/git-local/reproducibleInputs"
 lapply(dir('R', '*.R', full.names = TRUE), source)
 
+# make landStack since not module yet
+landStack = makeBarrengroundLand(studyAreaLarge, inPath = reproducibleInputsPath, dPath = 'inputs') |>
+  reproducible::Cache(.functionName = "landStack")
+terra::writeRaster(landStack, file.path('inputs', 'landStack.tif'))
+
 out <- SpaDES.project::setupProject(
   Restart = TRUE,
   useGit = 'JWTurn',
@@ -18,6 +23,7 @@ out <- SpaDES.project::setupProject(
   options = options(spades.allowInitDuringSimInit = TRUE,
                     spades.allowSequentialCaching = TRUE,
                     spades.moduleCodeChecks = FALSE,
+                    spades.useRequire = TRUE, # try to fix packages
                     spades.recoveryMode = 1,
                     reproducible.inputPaths = reproducibleInputsPath,
                     reproducible.useMemoise = TRUE
@@ -53,8 +59,7 @@ out <- SpaDES.project::setupProject(
 
   studyAreaLarge = terra::buffer(studyArea, 50000),
 
-  landStack = makeBarrengroundLand(studyAreaLarge, inPath = reproducibleInputsPath, dPath = 'inputs') |>
-    reproducible::Cache(.functionName = "landStack")
+  landStack = terra::rast(file.path('inputs', 'landStack.tif'))
 
   # OUTPUTS TO SAVE -----------------------
   # outputs = {

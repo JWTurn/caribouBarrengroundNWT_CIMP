@@ -1,0 +1,6 @@
+[submodule "modules/RSFpredict"]
+	path = modules/RSFpredict
+	url = https://github.com/JWTurn/RSFpredict
+[submodule "modules/prepLandscape"]
+	path = modules/prepLandscape
+	url = https://github.com/JWTurn/prepLandscape
